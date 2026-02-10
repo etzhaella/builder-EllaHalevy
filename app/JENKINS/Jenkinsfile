@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     environment {
-        // Change this to your real GitHub repo URL
+        // GitHub repo URL
         GIT_REPO_URL = 'https://github.com/etzhaella/EllaHalevvy_CICD_PracticalExam.git'
+        // Branch name
+        GIT_BRANCH   = 'main'
 
         // Docker Hub image (must be lowercase)
         IMAGE_NAME   = 'etzhaella/flask-aws-monitor'
@@ -58,7 +60,7 @@ pipeline {
                 // dockerhub-creds = username+token stored in Jenkins Credentials
                 withCredentials([usernamePassword(
                     credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'etzhaella'
+                    usernameVariable: 'DOCKERHUB_USERNAME',
                     passwordVariable: 'DOCKERHUB_PASSWORD'
                 )]) {
                     sh '''
